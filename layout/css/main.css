@@ -1,0 +1,15 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: #FDFF8F;
+    position: relative;
+    min-height: 100vh;
+}
+
+#main{
+    background-color: coral;
+    border-radius: 30px;
+}
