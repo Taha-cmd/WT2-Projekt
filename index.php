@@ -16,11 +16,9 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-    <link rel="stylesheet" href="layout/css/login.css">
-    <link rel="stylesheet" href="layout/css/footer.css">
-    <link rel="stylesheet" href="layout/css/header.css">
-    <link rel="stylesheet" href="layout/css/main.css">
-    <link rel="icon" href="pics/logo.png"></link>
+    <link rel="stylesheet" href="css/main.min.css">
+    <link rel="icon" href="pics/logo.png">
+    </link>
     <title>wtf</title>
 </head>
 
@@ -29,7 +27,7 @@ session_start();
         include 'includes/pages/header.html';
     ?>
 
-    
+
     <main id="main" class="p-2 p-md-3 p-lg-4 p-xl-5 my-5 mx-2 mx-md-3 mx-lg-4 mx-xl-5">
         <?php 
             if(isset($_GET["page"]))
