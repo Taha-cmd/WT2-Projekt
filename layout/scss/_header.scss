@@ -1,7 +1,7 @@
 /* header */
 
 #header {
-	color: $white;
+	color: $light;
 	font-size: 1.2rem;
 	max-height: 125px;
 	align-items: center;
@@ -10,14 +10,12 @@
 }
 
 #logo {
-	max-width: 90px;
-	max-height: 90px;
+	@include max-height-width(90px, 90px);
 	margin: 1rem 0rem;
 }
 
 #user-info {
-	max-width: 50px;
-	max-height: 50px;
+	@include max-height-width(50px, 50px);
 	margin-bottom: 1.5rem;
 	text-align: center;
 	font-size: 1rem;
@@ -33,7 +31,7 @@
 
 /* navigation */
 #navbar {
-	color: $white;
+	color: $light;
 	font-size: 1.2rem;
 	@include absolute(20px, 20%);
 	border-radius: 20px;
@@ -58,7 +56,7 @@
 
 #navbar ul a {
 	text-decoration: none;
-	color: $white;
+	color: $light;
 }
 
 #navbar ul > li:hover {
@@ -67,7 +65,7 @@
 }
 
 #burger-icon {
-	color: $white;
+	color: $light;
 	display: none;
 	font-size: 2rem;
 	margin: auto;
@@ -101,7 +99,7 @@
 
 #count {
 	padding-right: 0.5rem;
-	border-right: 1px solid $white;
+	border-right: 1px solid $light;
 }
 
 #cartIcon {
