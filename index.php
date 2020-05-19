@@ -1,9 +1,25 @@
 <?php
+include 'includes/config.php';
+
 if($_SERVER["REQUEST_SCHEME"] === 'http'){
-    $location = "https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"];
-    header("location: $location");
+    header("location: ".HOMEURL."");
 }
+
 session_start();
+include 'includes/classes/db.class.php';
+include 'includes/classes/filehandle.class.php';
+$dealer = new Filehandle();
+$db = new DB();
+
+include 'scripts/server/register.php';
+include 'scripts/server/login.php';
+include 'scripts/server/edit.php';
+
+if(isset($_SESSION["user"])){
+    if($_SESSION["user"]->profile_pic == null){
+        $_SESSION["user"]->profile_pic = ANONYMOUS;
+    }
+}
 
 ?>
 
@@ -24,7 +40,7 @@ session_start();
 
 <body class="d-flex flex-column">
     <?php
-        include 'includes/pages/header.html';
+        include 'includes/pages/header.php';
     ?>
 
 
@@ -34,9 +50,19 @@ session_start();
             {
                 switch($_GET["page"])
                 {
-                    case 'register': include 'includes/pages/register.html';
+                    case 'register': include 'includes/pages/register.php';
+                        break;
+                    
+                    case 'profile': include 'includes/pages/profile.php';
+                        break;
+
+                    case 'impressum': include 'includes/pages/impressum.html';
                         break;
                 }
+            }
+            else
+            {
+                include 'includes/pages/home.html';
             }
         ?>
     </main>
@@ -53,6 +79,27 @@ session_start();
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="layout/js/layout.js"></script>
     <script src="scripts/client/user.js"></script>
+    <script src="scripts/client/upload.js"></script>
+
+
+    <?php
+        /*if(isset($_SESSION["triggerTarget"])){
+            echo
+            '<script>
+                $("'.$_SESSION['triggerTarget'].'").trigger("'.$_SESSION["triggerEvent"].'");
+            </script>';
+            unset($_SESSION["triggerTarget"]);
+            unset($_SESSION["triggerEvent"]);
+        }
+
+        if(isset($_SESSION["error"])){
+            echo
+            '<script>
+                alert("'.$_SESSION["error"].'");
+            </script>';
+            unset($_SESSION["error"]);
+        } */
+    ?>
 
 </body>
 

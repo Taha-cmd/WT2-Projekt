@@ -17,9 +17,23 @@ $("#login-link").click(function () {
 	$("#modal-content").fadeIn(500);
 });
 
+$("#edit-button").click(function () {
+	$("#modal").slideDown();
+	$("#password-prompt-content").fadeIn(500);
+});
+
 $("#modal").click(function (event) {
 	if (event.target == this) {
 		$(this).slideUp();
 		$("#modal-content").fadeOut(500);
+		$("#password-prompt-content").fadeOut(500);
 	}
+});
+
+$("#dropbox").on("dragover", function (event) {
+	$(this).addClass("hover");
+});
+
+$("#dropbox").on("dragleave drop", function (event) {
+	$(this).removeClass("hover");
 });
