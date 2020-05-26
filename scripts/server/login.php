@@ -7,6 +7,7 @@ if(isset($_POST["login"]))
     if($db->verify($_POST["username"], $_POST["password"])){
         $_SESSION["loggedIn"] = true;
         $_SESSION["user"] = $db->getUserInfo($_POST["username"]);
+        $_SESSION["user"]->password = "";
     }
     reload();
 }

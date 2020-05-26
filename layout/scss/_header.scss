@@ -96,6 +96,10 @@ nav {
 	}
 }
 
+.active {
+	@extend li:not(#logout-button):hover;
+}
+
 #burger-icon {
 	color: $light;
 	display: none;
@@ -149,17 +153,46 @@ nav {
 	color: $light;
 }
 
-@media only screen and (max-width: 575.98px) {
+@media only screen and (max-width: 768px) {
 	#navbar {
-		font-size: 1.5rem;
+		font-size: 1.2rem;
 	}
 }
 
-@media only screen and (max-width: 991.98px) {
-	#navbar {
+@media only screen and (min-width: 768px) {
+	#navbar,
+	#admin-tools {
+		font-size: 0.8rem;
+	}
+}
+
+@media only screen and (min-width: 991.98px) {
+	#navbar,
+	#admin-tools {
 		font-size: 1rem;
 	}
 }
 
-@media only screen and (max-width: 1199.98px) {
+@media only screen and (min-width: 1199.98px) {
+	#navbar {
+		font-size: 1.2rem;
+	}
+}
+
+#admin-tools {
+	p {
+		margin-bottom: 0rem;
+	}
+	a {
+		transition: 0.1s;
+		color: $light;
+		text-decoration: none;
+		i {
+			font-size: 1.2rem;
+		}
+	}
+	a:hover {
+		cursor: pointer;
+		transform: scale(1.1);
+	}
 }

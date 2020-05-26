@@ -5,13 +5,15 @@ define('USER', 'root');
 define('PASSWORD', 'Taha');
 define('DATABASE', 'bilddb');
 
-define('PROFILEPICSFOLDER', 'profile-pictures/');
-define('ORIGINALPICSFOLDER', 'uploads/original/');
-define('THUMBNAILSFOLDER', 'uploads/thumbnails/');
-define('WATERMARKFOLDER', 'uploads/watermark');
+define('PROFILE_PICTURES_FOLDER', 'profile-pictures/');
+define('ORIGINAL_PICTURES_FOLDER', 'uploads/original/');
+define('THUMBNAILS_FOLDER', 'uploads/thumbnails/');
+define('WATERMARKS_FOLDER', 'uploads/watermark/');
+define('WATERMARK', 'pics/watermark.png');
 
 define('HOMEURL', 'https://localhost/wt2/Projekt/index.php');
 define('ANONYMOUS', 'profile-pictures/anonymous.png');
+
 
 function reload(){
     unset($_POST);

@@ -1,0 +1,66 @@
+#users {
+	.user {
+		margin: 3rem rem;
+		.user-img {
+			@include max-height-width(200px, 200px);
+			img {
+				@include height-width(auto, 100%);
+			}
+		}
+	}
+	p {
+		font-size: 1.2rem;
+	}
+}
+
+.pics-container {
+	border: 1px solid black;
+	border-radius: 20px;
+}
+
+.img-container {
+	position: relative;
+	img {
+		@include height-width(auto, 100%);
+		border-radius: 25px;
+	}
+	.img-description {
+		width: 100%;
+	}
+}
+
+#admin {
+	hr {
+		margin: 5rem 0rem;
+		border: 2px solid black;
+	}
+}
+
+.picture-delete {
+	@include absolute(8%, 75%);
+	z-index: 1;
+	font-size: 1.1rem;
+	border-radius: 50%;
+	transition: 0.1s;
+	i {
+		padding-top: 0.2rem;
+		font-size: 1.5rem;
+	}
+}
+.picture-delete:hover {
+	transform: scale(1.1);
+}
+
+@media only screen and (max-width: 992px) {
+	.picture-delete {
+		font-size: 0.6rem;
+		left: 70%;
+	}
+}
+
+@media only screen and (max-width: 576px) {
+	.picture-delete {
+		font-size: 1rem;
+		left: 80%;
+	}
+}

@@ -12,7 +12,7 @@ $(window).on("resize", function () {
 });
 
 /* login modal -> login*/
-$("#login-link").click(function () {
+$(".login-link").click(function () {
 	$("#modal").slideDown();
 	$("#modal-content").fadeIn(500);
 });

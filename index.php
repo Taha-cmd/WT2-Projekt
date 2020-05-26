@@ -6,20 +6,54 @@ if($_SERVER["REQUEST_SCHEME"] === 'http'){
 }
 
 session_start();
+
 include 'includes/classes/db.class.php';
 include 'includes/classes/filehandle.class.php';
 $dealer = new Filehandle();
 $db = new DB();
 
+$_SESSION["pictures"] = $db->getPictures();
+
 include 'scripts/server/register.php';
 include 'scripts/server/login.php';
 include 'scripts/server/edit.php';
+include 'scripts/server/upload.php';
+include 'scripts/server/filter.php';
+include 'scripts/server/delete.php';
+include 'scripts/server/shop.php';
 
 if(isset($_SESSION["user"])){
     if($_SESSION["user"]->profile_pic == null){
         $_SESSION["user"]->profile_pic = ANONYMOUS;
     }
+    $_SESSION["user"]->pics = $db->getPictures($_SESSION["user"]->id);
 }
+
+if(isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]){
+    if($_SESSION["user"]->is_admin == 1){
+        $_SESSION["user"]->users = $db->getUsers();
+    } else {
+        $_SESSION["user"]->cart = $db->getUserCart($_SESSION["user"]->id);
+    }
+}
+
+
+/*pictures[
+    id =>
+    path =>
+    tags => [
+        tag,
+        tag,
+        .....  
+    ],
+    ...
+] */
+
+//var_dump($_SESSION["pictures"]);
+//var_dump($_SESSION["user"]->pics);
+//var_dump($_SESSION["user"]->users[0]->username);
+//var_dump($_SESSION["user"]);
+
 
 ?>
 
@@ -35,6 +69,7 @@ if(isset($_SESSION["user"])){
     <link rel="stylesheet" href="css/main.min.css">
     <link rel="icon" href="pics/logo.png">
     </link>
+    <link rel="stylesheet" href="css/lightbox.min.css">
     <title>wtf</title>
 </head>
 
@@ -58,18 +93,34 @@ if(isset($_SESSION["user"])){
 
                     case 'impressum': include 'includes/pages/impressum.html';
                         break;
+
+                    case 'gallery': include 'includes/pages/gallery.php';
+                        break;
+
+                    case 'help': include 'includes/pages/help.html';
+                        break;
+
+                    case 'admin': include 'includes/pages/admin.php';
+                        break;
+
+                    case 'cart': include 'includes/pages/cart.php';
+                        break;
                 }
             }
             else
             {
-                include 'includes/pages/home.html';
+                if(isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]){
+                    include 'includes/pages/home.php';
+                } else {
+                    include 'includes/pages/help.html';
+                }
             }
         ?>
     </main>
 
 
     <?php
-        include 'includes/pages/footer.html';
+        include 'includes/pages/footer.php';
         include 'includes/pages/login.html';
     ?>
 
@@ -80,27 +131,15 @@ if(isset($_SESSION["user"])){
     <script src="layout/js/layout.js"></script>
     <script src="scripts/client/user.js"></script>
     <script src="scripts/client/upload.js"></script>
+    <script src="scripts/client/filter.js"></script>
+    <script src="scripts/lightbox/lightbox.min.js"></script>
+    <script src="scripts/client/shop.js"></script>
 
-
-    <?php
-        /*if(isset($_SESSION["triggerTarget"])){
-            echo
-            '<script>
-                $("'.$_SESSION['triggerTarget'].'").trigger("'.$_SESSION["triggerEvent"].'");
-            </script>';
-            unset($_SESSION["triggerTarget"]);
-            unset($_SESSION["triggerEvent"]);
-        }
-
-        if(isset($_SESSION["error"])){
-            echo
-            '<script>
-                alert("'.$_SESSION["error"].'");
-            </script>';
-            unset($_SESSION["error"]);
-        } */
-    ?>
-
+    <script>
+    lightbox.option({
+        disableScrolling: true,
+    });
+    </script>
 </body>
 
 </html>

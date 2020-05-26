@@ -1,8 +1,8 @@
 <?php
 
-include 'dbhelper.class.php';
+include 'base-classes/dbhelper.class.php';
 
-class DB extends dbhelper{
+class DB extends DBhelper{
     private $connected = false;
     private $results;
 
@@ -33,10 +33,6 @@ class DB extends dbhelper{
         $this->userExistsSQL->execute();
         $this->results = $this->obj($this->userExistsSQL);
         return $this->results->notValid == 1;
-    }
-
-    private function verifyPassword($password){
-        
     }
 
     public function register($username, $email, $password, $gender, $firstname,
@@ -119,5 +115,143 @@ class DB extends dbhelper{
         $this->updateProfilePicSQL->execute();
         return $this->updateProfilePicSQL->errno == 0;
 
-    } 
+    }
+
+    public function addPicture($path, $description ,$userID)
+    {
+        if(!$this->connected) return;
+        $this->path = mysqli_real_escape_string($this->link, $path);
+        $this->userID = mysqli_real_escape_string($this->link, $userID);
+        $this->description = mysqli_real_escape_string($this->link, $description);
+
+        $this->addPictureSQL->execute();
+        return $this->addPictureSQL->errno == 0;
+    }
+
+    public function getPictures($userID = -1)
+    {
+        if(!$this->connected) return;
+
+        $results = [];
+        if($userID === -1){
+            $this->getPicturesSQL->execute();
+            $rows = $this->getPicturesSQL->get_result(); // store results in rows
+        } else {
+            $this->userID = $userID;
+            $this->getUserPicturesSQL->execute();
+            $rows = $this->getUserPicturesSQL->get_result();
+        }
+
+        while($row = $rows->fetch_object()){ 
+            $tmp = ["description" => $row->description, 
+            "path" => $row->path, "id" => $row->id, "tags" => $this->getTags($row->id)];
+            array_push($results, $tmp);
+        }
+        return $results;
+    }
+
+
+    public function getPicId($path)
+    {
+        if(!$this->connected) return;
+
+        $id = $this->link->query("SELECT id FROM pictures WHERE path = '$path'");
+        $id = $id->fetch_object();
+        return $id === null ? false : $id->id;
+
+    }
+
+    public function addTag($id, $tag)
+    {
+        if(!$this->connected) return;
+        
+        $this->picID = mysqli_real_escape_string($this->link, $id);
+        $this->tag = mysqli_real_escape_string($this->link, $tag);
+
+        $this->addTagSQL->execute();
+        return $this->addTagSQL->errno == 0;
+    }
+
+    public function getTags($picID)
+    {
+        if(!$this->connected) return;
+
+        $this->picID = mysqli_real_escape_string($this->link, $picID);
+        $this->getTagsSQL->execute();
+        $rows = $this->getTagsSQL->get_result();
+        $results = [];
+        while($row = $rows->fetch_object()){
+            array_push($results, $row->tag);
+        }
+        return $results;
+    }
+
+    public function getUsers()
+    {
+        if(!$this->connected) return;
+
+        $this->getUsersSQL->execute();
+        $rows = $this->getUsersSQL->get_result();
+        $results = [];
+        while($row = $rows->fetch_object()){
+            array_push($results, $row);
+        }
+        return $results;
+    }
+
+    public function getUserCart($userID)
+    {
+        if(!$this->connected) return;
+
+        $this->userID = mysqli_real_escape_string($this->link, $userID);
+        $this->getUserCartSQL->execute();
+        $rows = $this->getUserCartSQL->get_result();
+        $results = [];
+        while($row = $rows->fetch_object()){
+            $tmp = ["price" => $row->price, "path" => $row->path];
+            array_push($results, $tmp);
+        }
+        return $results;
+    }
+
+    public function removePicture($path)
+    {
+        if(!$this->connected) return;
+
+        $this->path = mysqli_real_escape_string($this->link, $path);
+        $this->removePictureSQL->execute();
+        return $this->removePictureSQL->errno == 0;
+    }
+
+    public function removeUser($username)
+    {
+        if(!$this->connected) return;
+
+        $this->username = mysqli_real_escape_string($this->link, $username);
+        $this->removeUserSQL->execute();
+        return $this->removeUserSQL->errno == 0;
+    }
+
+    public function addToCart($userID, $picID, $price)
+    {
+        if(!$this->connected) return;
+
+        $this->userID = mysqli_real_escape_string($this->link, $userID);
+        $this->picID = mysqli_real_escape_string($this->link, $picID);
+        $this->price = mysqli_real_escape_string($this->link, $price);
+        $this->addToCartSQL->execute();
+        return $this->addToCartSQL->errno == 0;
+    }
+
+    public function removeProduct($picID, $userID)
+    {
+        if(!$this->connected) return;
+
+        $this->userID = mysqli_real_escape_string($this->link, $userID);
+        $this->picID = mysqli_real_escape_string($this->link, $picID);
+
+        $this->removeProductSQL->execute();
+        return $this->removeProductSQL->errno == 0;
+    }
+
 }
