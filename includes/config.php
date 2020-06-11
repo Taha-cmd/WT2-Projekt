@@ -1,8 +1,8 @@
 <?php
 
 define('SERVER', 'localhost');
-define('USER', 'root');
-define('PASSWORD', 'Taha');
+define('USER', 'ImageDBUser');
+define('PASSWORD', '123User!');
 define('DATABASE', 'bilddb');
 
 define('PROFILE_PICTURES_FOLDER', 'profile-pictures/');
@@ -30,4 +30,8 @@ function redirectHome()
     </script>';
 }
 
+<<<<<<< HEAD
 ?>
+=======
+?>
+>>>>>>> 37c1daf482c6ea5cf7dd53967728feac504a4d3b
