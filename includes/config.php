@@ -1,8 +1,8 @@
 <?php
 
 define('SERVER', 'localhost');
-define('USER', 'root');
-define('PASSWORD', 'Taha');
+define('USER', 'ImageDBUser');
+define('PASSWORD', '123User!');
 define('DATABASE', 'bilddb');
 
 define('PROFILE_PICTURES_FOLDER', 'profile-pictures/');

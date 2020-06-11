@@ -37,9 +37,6 @@ if(isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]){
     }
 }
 
-
-
-
 /*pictures[
     id =>
     path =>
@@ -50,12 +47,6 @@ if(isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]){
     ],
     ...
 ] */
-
-//var_dump($_SESSION["pictures"]);
-//var_dump($_SESSION["user"]->pics);
-//var_dump($_SESSION["user"]->users[0]->username);
-//var_dump($_SESSION["user"]);
-
 
 ?>
 
