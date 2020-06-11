@@ -33,19 +33,19 @@ $users = $_SESSION["user"]->users;
                         <p>name: '.$user->firstname.' '.$user->lastname.' </p>
                     </div>
                     <div class="d-flex flex-column">
-                        <p>uploaded images: '.count($pics).'</p>
-                        <p>bla bla:  </p>
+                        <p>uploaded images: '.count($pics["uploaded"]).'</p>
+                        <p>bought images: '.count($pics["bought"]).'</p>
                         <p>whatever: </p>
                     </div>
                 </div>
                 <button class="ml-md-5 btn btn-danger user-delete">remove user <i class="fas fa-user-slash"></i></button>
-                </div>';
+            </div>';
 
             echo
-            '<h5 class="text-center">Pictures <i class="fas fa-images"></i></h5>
+            '<h5 class="text-center">Uploaded Pictures <i class="fas fa-images"></i></h5>
             <div class="container pics-container p-5 d-flex flex-row flex-wrap">';
              
-            foreach($pics as $pic)
+            foreach($pics["uploaded"] as $pic)
             {
                 echo
                 '<div class="img-container mb-5 d-flex flex-column col-12 col-sm-6 col-md-4">
@@ -57,21 +57,32 @@ $users = $_SESSION["user"]->users;
                     </div>
                 </div>';
             }
+
+            echo '</div>';
             
             echo
+            '<h5 class="text-center my-3">Bought Pictures <i class="fas fa-images"></i></h5>
+            <div class="container pics-container p-5 d-flex flex-row flex-wrap">';
+                 
+            foreach($pics["bought"] as $pic)
+            {
+                echo
+                '<div class="img-container mb-5 d-flex flex-column col-12 col-sm-6 col-md-4">
+                    <div class="my-2">
+                        <a><img src="'.$pic["path"].'" alt=""></a>
+                    </div>
+                    <div>
+                        <button class="btn btn-danger picture-delete"><i class="far fa-times-circle"></i></button>
+                    </div>
+                </div>';
+            } 
+            
+            echo 
             '</div><hr>'; 
         } 
 
         ?>
 
-    </div>
-
-    <div>
-
-        <?php
-
-
-            ?>
     </div>
 
 

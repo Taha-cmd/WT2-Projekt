@@ -35,8 +35,8 @@ class DBhelper {
     protected $updatePasswordSQL = "UPDATE user SET password = ? WHERE username = ?";
     protected $updateProfilePicSQL = "UPDATE user SET profile_pic = ?, profile_pic_type = ? WHERE username = ?";
     protected $addPictureSQL = "INSERT INTO pictures (path, user_id, description) VALUES(?,?,?)";
-    protected $getPicturesSQL = "SELECT path, id, description FROM pictures";
-    protected $getUserPicturesSQL = "SELECT path, id, description FROM pictures where user_id = ?";
+    protected $getPicturesSQL = "SELECT path, id, uploaded, description FROM pictures";
+    protected $getUserPicturesSQL = "SELECT path, id, description, uploaded FROM pictures where user_id = ?";
     protected $addTagSQL = "INSERT INTO tags (pic_id, tag) VALUES(?,?)";
     protected $getTagsSQL = "SELECT tag FROM tags where pic_id = ?";
     protected $getUsersSQL = "SELECT * FROM user";

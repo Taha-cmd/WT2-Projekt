@@ -73,3 +73,19 @@ function animateCart() {
 		$("#cart div").removeClass("carthover");
 	}, 250);
 }
+
+$("#buy-now").click(function (e) {
+	e.preventDefault();
+
+	$.ajax({
+		type: "POST",
+		url: "index.php",
+		data: { buy_all: "" },
+		success: function (response) {
+			if (response) {
+				$(".product-container").removeClass("d-flex").remove();
+				updateCart({ price: 0, count: 0 });
+			}
+		},
+	});
+});

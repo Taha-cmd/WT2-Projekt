@@ -9,7 +9,6 @@ function updateCart($db)
     } else {
         $response["price"] = 0;
     }
-    
 
     return json_encode($response);
 }
@@ -38,5 +37,12 @@ if(isset($_POST["remove_product"]))
         echo updateCart($db);
     }
 
+    exit(0);
+}
+
+
+if(isset($_POST["buy_all"]))
+{
+    echo ($db->buyProducts($_SESSION["user"]->id));
     exit(0);
 }

@@ -38,6 +38,8 @@ if(isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]){
 }
 
 
+
+
 /*pictures[
     id =>
     path =>
@@ -134,6 +136,7 @@ if(isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]){
     <script src="scripts/client/filter.js"></script>
     <script src="scripts/lightbox/lightbox.min.js"></script>
     <script src="scripts/client/shop.js"></script>
+    <script src="scripts/client/download.js"></script>
 
     <script>
     lightbox.option({

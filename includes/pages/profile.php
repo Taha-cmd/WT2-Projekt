@@ -3,6 +3,10 @@
         if(!$_SESSION["loggedIn"]){ 
             redirectHome();
         }
+    }
+
+    if(!isset($_SESSION["loggedIn"])){
+        redirectHome();
     } 
 ?>
 

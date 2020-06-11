@@ -11,8 +11,26 @@
     <br>
 
     <div id="gallery" class="d-flex flex-wrap flex-row justify-content-start">
+        <div id="tags" class="px-5">
+            <h3 class="text-center mb-5">Tags <i class="fas fa-tags"></i></h3>
+            <?php
+                foreach($_SESSION["pictures"]["uploaded"] as $pic)
+                {
+                    foreach($pic["tags"] as $tag)
+                    {
+                        echo
+                        '<span draggable="true" class="tag">#'.$tag.'</span>'; 
+                    }
+                }
+            ?>
+            <div class="mb-5 mt-1">
+                <h3 class="text-center">Pictures <i class="fas fa-images"></i></h3>
+            </div>
+        </div>
+
+
         <?php
-            foreach($_SESSION["pictures"] as $pic) // pic is assoc array of path and id
+            foreach($_SESSION["pictures"]["uploaded"] as $pic) // pic is assoc array of path and id
             { 
                 $thumb = str_replace(ORIGINAL_PICTURES_FOLDER, THUMBNAILS_FOLDER.'thumb.', $pic["path"]);
                 $watermark = str_replace(ORIGINAL_PICTURES_FOLDER, WATERMARKS_FOLDER.'watermark.', $pic["path"]);

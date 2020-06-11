@@ -5,7 +5,7 @@ if(isset($_POST["search"]))
 {
     $term = $_POST["search"];
     $results = [];
-    foreach($_SESSION["pictures"] as $pic) // search through all pics
+    foreach($_SESSION["pictures"]["uploaded"] as $pic) // search through all pics
     {
         foreach($pic["tags"] as $tag) // search through all tags of a pic
         {

@@ -6,6 +6,7 @@ if(isset($_FILES["file"]))
     $description = $_POST["description"];
     $tags = json_decode($_POST["tags"]);
     $path = $dealer->add($_FILES["file"]);
+    if(!$path) exit(0);
     $db->addPicture($path, $description, $_SESSION["user"]->id);
     $id = $db->getPicId($path);
     if($id){

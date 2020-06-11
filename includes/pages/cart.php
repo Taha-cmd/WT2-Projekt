@@ -47,13 +47,22 @@ foreach($_SESSION["user"]->cart as $pic)
 
                 echo
                 '<span class="ml-5">
-                    <button class="btn rounded btn-outline-dark"><h6 class="mb-0">Buy now 
+                    <button id="buy-now" class="btn rounded btn-outline-dark"><h6 class="mb-0">Buy now 
                         <i class="fab fa-shopify"></i>
                     </h6></button>
                 </span>';
             }
             ?>
         </h4>
+    </div>
+
+
+    <div id="shipping-address" class="d-flex justify-content-end">
+        <?php
+            echo
+             'Shipping address  <i class="fas fa-home"></i> : '.
+             $_SESSION["user"]->city.' '.$_SESSION["user"]->street_housenr ;
+        ?>
     </div>
 
     <div class="d-flex justify-content-end">

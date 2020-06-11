@@ -61,9 +61,10 @@
 
         <div id="my-gallery" class="d-flex flex-wrap flex-row justify-content-start pt-5">
             <?php
-            foreach($_SESSION["user"]->pics as $pic) // $pic is an assoc array
+            foreach($_SESSION["user"]->pics["uploaded"] as $pic) // $pic is an assoc array
             {
                 $thumb = str_replace(ORIGINAL_PICTURES_FOLDER, THUMBNAILS_FOLDER.'thumb.', $pic["path"]);
+                $id = uniqid(); // to make unique checkboxes
                 
                 echo
                 '<div class="img-container mb-5 d-flex flex-column col-12 col-sm-6 col-md-4 col-lg-3">
@@ -73,6 +74,9 @@
                     
                     <div class="not-relative">
                         <button class="btn btn-danger picture-delete"><i class="far fa-times-circle"></i></button>
+                        <a target="_blank" href="scripts/server/download.php?path='.$pic["path"].'">
+                            <button class="btn btn-success picture-download"><i class="fas fa-download"></i></button>
+                        </a>
                     </div>
                     
                     <div class="img-description">
@@ -91,11 +95,96 @@
                         '<span class="tag">#'.$tag.'</span>'; 
                     }
                     echo
-                    '</div> 
+                    '</div>
+                    
+                    <form>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="'.$id.'" name="'.$id.'">
+                        <label class="custom-control-label" for="'.$id.'"></label>
+                    </div>
+                </form>
+                
                 </div>'; 
             }
         ?>
         </div>
+    </div>
+
+    <hr>
+
+    <h1 class="text-center my-3">Bought pictures <i class="far fa-images"></i></h1>
+    <div id="bought" class="d-flex flex-wrap flex-row justify-content-start pt-5">
+        <?php
+            foreach($_SESSION["user"]->pics["bought"] as $pic) // $pic is an assoc array
+            {
+                $id = uniqid();
+                $thumb = str_replace(ORIGINAL_PICTURES_FOLDER, THUMBNAILS_FOLDER.'thumb.', $pic["path"]);
+                
+                echo
+                '<div class="img-container mb-5 d-flex flex-column col-12 col-sm-6 col-md-4 col-lg-3">
+                    <div class="my-2">
+                        <a href="'.$pic["path"].'" data-lightbox="home"><img src="'.$thumb.'" alt=""></a>
+                    </div>
+                    
+                    <div class="not-relative">
+                        <button class="btn btn-danger picture-delete"><i class="far fa-times-circle"></i></button>
+                        <a target="_blank" href="scripts/server/download.php?path='.$pic["path"].'">
+                            <button class="btn btn-success picture-download"><i class="fas fa-download"></i></button>
+                        </a>
+                    </div>
+                    
+                    <div class="img-description">
+                    description <i class="far fa-keyboard"></i> : ';
+                    if($pic["description"] != null) echo $pic["description"];
+
+                    echo
+                    '</div>
+
+
+                    <div class="tags">
+                        <span>tags <i class="fas fa-tag">: </i></span>';
+                    foreach($pic["tags"] as $tag)
+                    {
+                        echo
+                        '<span class="tag">#'.$tag.'</span>'; 
+                    }
+                    echo
+                    '</div>
+
+                    
+
+                    <form>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="'.$id.'" name="'.$id.'">
+                            <label class="custom-control-label" for="'.$id.'"></label>
+                        </div>
+                    </form>
+                    
+                </div>'; 
+            }
+        ?>
+
+    </div>
+
+    <hr>
+    <h1 class="text-center mb-5">Download section <i class="fas fa-download"></i></h1>
+
+    <div id="download-section" class="">
+        <div class="d-flex justify-content-center">
+            <button id="download-button" class="btn btn-lg btn-dark">Click here to download more than one picture
+                <i class="far fa-file-archive"></i>
+            </button>
+
+            <form id="download-form" action="scripts/server/download.php?paths" method="post">
+                <div class="alert alert-info"> Select the pictures you wish to download</div>
+                <div class="form-group d-flex flex-row">
+                    <button type="submit" class="btn btn-dark mr-5">Download now <i
+                            class="fas fa-download"></i></button>
+                    <button id="close-download" class="btn btn-danger"><i class="far fa-times-circle"></i></button>
+                </div>
+            </form>
+        </div>
+
     </div>
 
 </section>

@@ -35,6 +35,12 @@ class DB extends DBhelper{
         return $this->results->notValid == 1;
     }
 
+    private function getPicInfo($path)
+    {
+        $desc = $this->link->query("SELECT * FROM pictures WHERE path = '$path'");
+        return $desc->fetch_object();
+    }
+
     public function register($username, $email, $password, $gender, $firstname,
                             $lastname, $city, $postalCode,
                             $streetANDhouseNr, $profilePicType, $profilePic){ 
@@ -133,6 +139,8 @@ class DB extends DBhelper{
         if(!$this->connected) return;
 
         $results = [];
+        $results["uploaded"] = [];
+        $results["bought"] = [];
         if($userID === -1){
             $this->getPicturesSQL->execute();
             $rows = $this->getPicturesSQL->get_result(); // store results in rows
@@ -145,8 +153,13 @@ class DB extends DBhelper{
         while($row = $rows->fetch_object()){ 
             $tmp = ["description" => $row->description, 
             "path" => $row->path, "id" => $row->id, "tags" => $this->getTags($row->id)];
-            array_push($results, $tmp);
+            if($row->uploaded == 1){
+                array_push($results["uploaded"], $tmp);
+            } else {
+                array_push($results["bought"], $tmp);
+            } 
         }
+
         return $results;
     }
 
@@ -252,6 +265,32 @@ class DB extends DBhelper{
 
         $this->removeProductSQL->execute();
         return $this->removeProductSQL->errno == 0;
+    }
+
+    public function buyProducts($userID)
+    {
+        if(!$this->connected) return;
+
+        $products = $this->getUserCart($userID);
+        foreach($products as $product){
+            $path = $product["path"];
+            $info = $this->getPicInfo($path);
+            $description = $info->description;
+            $id = $info->id;
+            $this->link->query("INSERT INTO pictures (user_id, path, description, uploaded) 
+            VALUES ($userID, '$path', '$description', 0)");
+
+            $tags = $this->getTags($id);
+            $newID = $this->link->query("SELECT MAX(id) as id FROM pictures");
+            $newID = $newID->fetch_object();
+
+            foreach($tags as $tag)
+            {
+                $this->addTag($newID->id, $tag);
+            }
+        }
+
+        return ($this->link->query("DELETE FROM cart where user_id = $userID"));
     }
 
 }

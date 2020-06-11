@@ -5,9 +5,21 @@ $(".tag:not(.fa)").click(function (e) {
 	$("#filter").trigger("keyup"); // trigger search event
 });
 
+$(".tag:not(.fa)").on("dragstart", function (e) {
+	var term = $(this).html();
+	term = term.substring(1);
+
+	e.originalEvent.dataTransfer.setData("term", term);
+});
+
 $("#clear-icon").click(function (e) {
 	$("#filter").val("");
 	$("#filter").trigger("keyup");
+});
+
+$("#filter").on("drop", function (e) {
+	$(this).val(e.originalEvent.dataTransfer.getData("term"));
+	$(this).trigger("keyup");
 });
 
 $("#filter").keyup(function (event) {
