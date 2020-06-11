@@ -11,9 +11,11 @@ define('THUMBNAILS_FOLDER', 'uploads/thumbnails/');
 define('WATERMARKS_FOLDER', 'uploads/watermark/');
 define('WATERMARK', 'pics/watermark.png');
 
-define('HOMEURL', 'https://localhost/wt2/Projekt/index.php');
-define('ANONYMOUS', 'profile-pictures/anonymous.png');
+$homeUri = "https://localhost{$_SERVER['REQUEST_URI']}";
 
+//define('HOMEURL', 'https://localhost/wt2/Projekt/index.php');
+define('HOMEURL', $homeUri);
+define('ANONYMOUS', 'profile-pictures/anonymous.png');
 
 function reload(){
     unset($_POST);
@@ -27,3 +29,5 @@ function redirectHome()
         window.location.href = "'.HOMEURL.'";
     </script>';
 }
+
+?>
