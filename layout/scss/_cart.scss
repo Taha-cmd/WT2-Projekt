@@ -1,0 +1,42 @@
+.product-container {
+	margin: 3rem 0rem;
+	.cart-img {
+		@include max-height-width(300px, 300px);
+		img {
+			@include height-width(auto, 100%);
+		}
+	}
+
+	.remove-product {
+		font-size: 2rem;
+		border-color: transparent !important;
+	}
+}
+
+#cart {
+	div {
+		transition: 0.2s;
+	}
+}
+
+.carthover {
+	transform: scale(1.1);
+	background-color: $primary-color1;
+	border-radius: 10px;
+}
+
+#cart-container {
+	position: relative;
+	.payment {
+		font-size: 3rem;
+		padding: 1rem 0.5rem;
+	}
+}
+
+#shipping-address {
+	font-size: 1.1rem;
+	i {
+		display: flex;
+		align-items: center;
+	}
+}

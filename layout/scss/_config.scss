@@ -1,10 +1,12 @@
-$white: #ffffff;
-$black: rgb(0, 0, 0);
+$light: #ffffff;
+$dark: rgb(0, 0, 0);
 $primary-color1: #ff7f50;
 $primary-color2: #76e8e8;
 $light-bg: #fdff8f;
 $modal-bg1: rgb(0, 0, 0);
 $modal-bg2: rgba(0, 0, 0, 0.4);
+$inactive: rgb(75, 75, 75);
+$active: black;
 
 @mixin absolute($top, $left) {
 	position: absolute;
@@ -15,4 +17,43 @@ $modal-bg2: rgba(0, 0, 0, 0.4);
 @mixin height-width($height, $width) {
 	height: $height;
 	width: $width;
+}
+
+@mixin max-height-width($height, $width) {
+	max-height: $height;
+	max-width: $width;
+}
+
+@mixin min-height-width($height, $width) {
+	max-height: $height;
+	max-width: $width;
+}
+
+@mixin animate($name, $duration) {
+	animation-name: $name;
+	animation-duration: $duration;
+	animation-timing-function: ease-in-out;
+}
+
+@keyframes slide {
+	0% {
+		top: -150px;
+		width: 0;
+		left: 100%;
+	}
+	100% {
+		top: 0px;
+		width: 100%;
+		left: 0;
+	}
+}
+
+@keyframes drop {
+	0% {
+		top: -1000px;
+	}
+
+	100% {
+		top: 0;
+	}
 }
