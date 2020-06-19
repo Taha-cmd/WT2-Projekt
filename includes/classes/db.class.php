@@ -163,6 +163,20 @@ class DB extends DBhelper{
         return $results;
     }
 
+	public function getPicturesForNewsPage()
+	{
+		$result = [];
+		
+		$newsPicturesQuery = $this->link->prepare("SELECT * FROM `pictures` WHERE uploaded = 1 ORDER BY creation_date LIMIT 5");
+		$newsPicturesQuery->execute();
+		
+		$rows = $newsPicturesQuery->get_result();
+		
+		while($row = $rows->fetch_object())
+			array_push($result, $row);
+
+		return $result;
+	}
 
     public function getPicId($path)
     {

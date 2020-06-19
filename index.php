@@ -98,6 +98,10 @@ if(isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]){
 
                     case 'cart': include 'includes/pages/cart.php';
                         break;
+						
+					case 'news':
+						include 'includes/pages/news.php';
+						break;
                 }
             }
             else
