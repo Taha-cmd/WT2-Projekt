@@ -1,12 +1,11 @@
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="scripts/client/news.js"></script>
 
 <div id="newsImageContainer" class="container">
-	<h2>Neuste Bilder zum Verkauf</h2>
+    <h1 class="text-center mb-5">Latest Images <i class="fas fa-photo-video"></i></h1>
 
-	<div class="d-flex flex-wrap flex-row justify-content-start">
-		<?php
+    <div class="d-flex flex-wrap flex-row justify-content-start">
+        <?php
 			$newsPagePictures = $db->getPicturesForNewsPage();
 			
 			//var_dump($newsPagePictures);
@@ -20,10 +19,15 @@
 					<input type=\"hidden\" value=\"{$picture->id}\">
 				</div>";
 			}
-		?>	
-	</div>
-	
-	<form action="generatenewsfeed.php" method="post">
-		<input class="btn btn-primary" type="submit" name="submit" value="News- Feed" />
-	</form>
+		?>
+    </div>
+
+    <div class="d-flex m-5 justify-content-center">
+        <form action="scripts/server/generatenewsfeed.php" method="post">
+
+            <button class="btn btn-lg btn-primary" type="submit" name="submit">
+                <i class="fas fa-rss"></i> News Feed <i class="fas fa-rss"></i>
+            </button>
+        </form>
+    </div>
 </div>

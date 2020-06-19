@@ -1,9 +1,9 @@
 <?php
-include 'includes/config.php';
+include '../../includes/config.php';
 
 session_start();
 
-include 'includes/classes/db.class.php';
+include '../../includes/classes/db.class.php';
 
 $db = new DB();	
 $newsPagePictures = $db->getPicturesForNewsPage();
