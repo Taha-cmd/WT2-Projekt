@@ -79,8 +79,8 @@
     <ul>
         <li class=" <?php if(!isset($_GET["page"])) echo 'active'?>"><a href="index.php?">Home <i
                     class="fas fa-house-user"></i></a></li>
-		<li class=" <?php echo isActive('news')?>"><a href="index.php?page=news">News <i
-                    class=""></i></a></li>
+        <li class=" <?php echo isActive('news')?>"><a href="index.php?page=news">News <i
+                    class="far fa-newspaper"></i></a></li>
         <li class=" <?php echo isActive('gallery')?>"><a href="index.php?page=gallery">Gallery <i
                     class="fas fa-photo-video"></i></a></li>
         <?php

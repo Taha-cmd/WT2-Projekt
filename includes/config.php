@@ -11,7 +11,7 @@ define('THUMBNAILS_FOLDER', 'uploads/thumbnails/');
 define('WATERMARKS_FOLDER', 'uploads/watermark/');
 define('WATERMARK', 'pics/watermark.png');
 
-$homeUri = "https://localhost{$_SERVER['REQUEST_URI']}";
+$homeUri = "https://localhost{$_SERVER['PHP_SELF']}";
 
 //define('HOMEURL', 'https://localhost/wt2/Projekt/index.php');
 define('HOMEURL', $homeUri);
